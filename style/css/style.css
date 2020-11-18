@@ -1,0 +1,81 @@
+.body{
+    margin: 0;
+    margin: 0;
+    font-size: 16px;
+}
+.search-expand{
+    width: 20em;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+.search-expand:focus{
+    width: 40%;
+}
+.body-content{
+    display: flex;
+    flex-direction: row;
+    padding: 0.5em 1em ;
+    justify-content: space-between;
+}
+
+.board-left{
+    display: flex;
+    align-items: center;
+}
+
+.btn{
+    padding: 8px;
+}
+.btn-control{
+    width: 8rem;
+}
+.project-name{
+    padding: 0 1px;
+    margin: 0 1em;
+    font-size: 20px;
+    font-weight: bold;
+   text-transform: uppercase;
+   text-align: center;
+}
+.vertical-line{
+   font-size: 25px;
+   color: #666;
+}
+.list-member{
+    display: flex;
+    margin: 0 0.6rem;
+}
+.circleUser {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    font-weight: 300;
+}
+.line-hidden{
+    font-size: 10px;
+    visibility: hidden;
+    transform: translateY(-1rem);
+}
+.progress-board{
+   display: flex;
+   flex-direction: column;
+    align-items: cn;
+}
+.more-info{
+    position: absolute;
+    padding: 0.2em;
+    margin-top: 1em;
+    display: none;
+}
