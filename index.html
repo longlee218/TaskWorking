@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="style/bootstrap-4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style/css/style.css">
-    
+    <link rel="stylesheet" href="CalendarPickerJS-master/CalendarPickerJS-master/CalendarPicker_style.css">
     <title>Task Working</title>
 </head>
 <body>
@@ -23,14 +23,14 @@
                 <div class="col col-12 search-bar row">
                     <div class="input-group mb-3 col-12">
                         <div class="input-group-prepend">
-                          <button class="btn btn-outline-secondary" type="button" id="btn-list-project" name="list-project">Các dự án <i class="fas fa-caret-down"></i></button>
+                          <button class="btn btn-outline-secondary" type="button" id="btn-list-project" name="list-project" onclick="displayProject()">Các dự án <i class="fas fa-caret-down"></i></button>
                         </div>
                         <input type="search" class="search-expand" placeholder="Dự án" aria-label="Example text with button addon" aria-describedby="button-addon1">
                     </div>
                 </div>
                 <div class="col col-12 body-content">
                     <div class="board-left">
-                        <button class="btn btn-sm btn-secondary btn-control" onclick="displayControlBoard()">Điều khiển <i class="fas fa-caret-down"></i></button>
+                        <button class="btn btn-sm btn-secondary btn-control" id onclick="displayControlBoard()">Điều khiển <i class="fas fa-caret-down"></i></button>
                         <p class="project-name" id="project-title">Dự án AKB One</p>
                         <span class="vertical-line">|</span>
                         <div class="list-member row">
@@ -40,7 +40,7 @@
                             <a href="#" class="circleUser circle-next" id="4" onclick="displayInfo(this)">TD</a>
                             <a href="#" class="circleUser circle-next" id="5"><small>15+</small></a>
                         </div>
-                        <button class="btn btn-sm btn-secondary">Thêm</button>
+                        <button class="btn btn-sm btn-secondary" onclick="displayAddUser(this)">Thêm</button>
                         <!-- <span class="vertical-line ml-3 mr-3">|</span> -->
                         <!-- <div class="progress-board">
                             <div class="progress" style="transform: translateY(1em);">
@@ -51,26 +51,45 @@
                         </div> -->
                     </div>
                     <div class="board-center" style="width: 10em;"></div>
-                    <div class="board-right">
-                        <button class="btn btn-secondary">
-                            <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            <span class="ml-2">
-                                <small>Lịch</small>
-                            </span>
-                        </button>
-                        <button class="btn btn-secondary">
-                            <span><i class="fa fa-question" aria-hidden="true"></i>
-                            </span>
-                            <span class="ml-2">
-                                <small>Câu hỏi</small>
-                            </span>
-                        </button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalCalendar">Lịch</button>
+                        <button type="button" class="btn btn-sm btn-secondary">Câu hỏi</button>
+                      </div>
+                </div>
+            </div>
+            <div class="form-list-project" id="form-project">
+                <div name="recently-project">
+                    <div class="card" style="border: none;">
+                        <div class="title-option p-2">
+                          <p class="text-secondary">
+                            <i class="fa fa-clock" aria-hidden="true"></i>  
+                            Các dự án gần đây</p>
+                        </div>
+                        <div class="small">
+                            <a href="#" class="list-group-item list-group-item-action">Dự án AKB One</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án ILANCA</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án cây gia phả</a>
+                        </div>
+                    </div>
+                </div>
+                <div name="all-project" class="mt-2">
+                    <div class="card" style="border: none;">
+                        <div class="title-option p-2">
+                          <p class="text-secondary">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            Các dự án công ty</p>
+                        </div>
+                        <div class="small">
+                            <a href="#" class="list-group-item list-group-item-action">Dự án AKB One</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án ILANCA</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án cây gia phả</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án IOT Nhật</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án moblie</a>
+                            <a href="#" class="list-group-item list-group-item-action">Dự án AI khách hàng</a>
                     </div>
                 </div>
             </div>
-            <!-- <div class="form-list-project" style="position: absolute; width: 20em; height: 35em; border: 1px solid black; top: 6em; background-color: white;">
-                <p>Data</p>
-            </div> -->
+            </div>
             <div class="dashboard-more row">
                 <div class="col col-12">
                     <div class="dashboard-project" id="constrol-board" style="width: 20em;">
@@ -128,22 +147,57 @@
                     </div>
                 </div>
             </div>
+            <div class="form-add-user" id="form-add-user">
+                <div class="d-flex justify-content-center">
+                    <p>Thêm nhân lực</p>
+                </div>
+                <form class="">
+                    <div class="form-group">
+                        <input class="form-control small" type="text" placeholder="Tìm kiếm nhân viên">
+                    </div>
+                    <div class="form-group">
+                        <div class="small">
+                            <a href="#" class="list-group-item list-group-item-action">Bùi Minh Chiến</a>
+                            <a href="#" class="list-group-item list-group-item-action">Lê Hoàng Long</a>
+                            <a href="#" class="list-group-item list-group-item-action">Nguyễn Tuấn Anh</a>
+                          
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">Thêm</button>
+                    </div>
+                </form>
+            </div>
+            <div id="myCalendarWrapper" style="min-width: 98%; min-height: 75%; border: 1px solid gray; margin-top: 1em; padding: 1em 2em; position: relative; background-color: white;"></div>
+        </div>
         </section>
     </div>
     <script src="style/js/index.js"></script>
+    <script src="/CalendarPickerJS-master/CalendarPickerJS-master/CalendarPicker.js"></script>
 </body>
 </html>
 <script>
+
+const displayAddUser = (e) => {
+        const position = $(e).position()
+        console.log(position)
+        $('#form-add-user').css('left', (position.left)+'px')
+        $('#form-add-user').toggle()
+    }
+
+    const displayProject = () => {
+        $('#form-project').toggle()
+    }
+
     const displayInfo = (e) => {
         const current_postion =  $(e).position()
         $('#pop-user-info').css('left', (current_postion.left+20)+'px')
         $('#pop-user-info').css('top', (current_postion.top-12)+'px')
-        $('#pop-user-info').toggleClass('is-active')
-        console.log($('#pop-user-info'))
+        $('#pop-user-info').toggle()
 
     }
     const displayControlBoard = () => {
-        $('#constrol-board').toggleClass('is-active')
+        $('#constrol-board').toggle()
     }
 
     const title_project = $('#project-title')
@@ -152,13 +206,28 @@
     }
 
 
-    $(document).mouseup(e => {
-        if ((! $('#pop-user-info').is(e.target) // if the target of the click isn't the container...
-            && $('#pop-user-info').has(e.target).length === 0) || (! $('#constrol-board').is(e.target) // if the target of the click isn't the container...
-            && $('#constrol-board').has(e.target).length === 0)) // ... nor a descendant of the container
-        {
-            $('#pop-user-info').removeClass('is-active');
-            $('#constrol-board').removeClass('is-active');
-        }
-    });
+
+
+    const nextYear = new Date().getFullYear() + 1;
+    const myCalender = new CalendarPicker('#myCalendarWrapper', {
+      max: new Date(nextYear, 10) 
+});
+
+
+
+   
+
+
+    // $(document).mouseup(e => {
+    //     console.log($('#form-add-user').has(e.target).length)
+    //     if ((! $('#pop-user-info').is(e.target) && $('#pop-user-info').has(e.target) !== 0)  || 
+    //         (! $('#constrol-board').is(e.target) && $('#constrol-board').has(e.target) !== 0) ||
+    //         (! $('#form-add-user').is(e.target) && $('#form-add-user').has(e.target).length) !== 0 
+    //         ) 
+    //     {
+    //         $('#form-add-user').removeClass('is-active');
+    //         $('#pop-user-info').removeClass('is-active');
+    //         $('#constrol-board').removeClass('is-active');
+    //     }
+    // });
 </script>

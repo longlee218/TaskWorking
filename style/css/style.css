@@ -21,9 +21,9 @@
 }
 .body-content{
     display: flex;
-    flex-direction: row;
     padding: 0 1em ;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .board-left{
@@ -41,7 +41,6 @@
     font-weight: bold;
     text-transform: uppercase;
     white-space: nowrap; 
-    /* width: 20em;  */
     overflow: hidden;
     text-overflow: ellipsis; 
 }
@@ -102,4 +101,30 @@
     position: absolute;
     padding: 5px;
     display: none;
+}
+.form-list-project{
+    display: none;
+    position: absolute; 
+    width: 22em;
+    padding: 0.5em 1em 1em 1em; 
+    top: 6em; 
+    background-color: white; 
+    border-radius: 0.2em; 
+    border: 1px gainsboro solid; 
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+.form-add-user{
+    margin-top: 0.2em;
+    display: none;
+    width: 15em; 
+    position: absolute; 
+    background-color: white; 
+    padding: 1em;  
+    border-radius: 0.5em; 
+    border: 1px solid gainsboro;
+    max-height: calc(130vh - 200px);
+}
+.form-add-user.is-active{
+    display: block;
 }
