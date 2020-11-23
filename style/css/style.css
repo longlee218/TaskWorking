@@ -128,3 +128,15 @@
 .form-add-user.is-active{
     display: block;
 }
+ul{
+    list-style-type: none;
+}
+ul li{
+    margin: 0.2em 0;
+}
+.body-current-card{
+    border: 1px gainsboro solid;
+    padding: 1em;
+    margin: 0.2em 0;
+    border-radius: 0.5em;    
+}

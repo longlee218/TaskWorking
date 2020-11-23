@@ -52,8 +52,12 @@
                     </div>
                     <div class="board-center" style="width: 10em;"></div>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modalCalendar">Lịch</button>
-                        <button type="button" class="btn btn-sm btn-secondary">Câu hỏi</button>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="displayCalendar()">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            Lịch</button>
+                        <button type="button" class="btn btn-sm btn-secondary ml-2">
+                            <i class="fa fa-question" aria-hidden="true"></i>
+                            Câu hỏi</button>
                       </div>
                 </div>
             </div>
@@ -92,7 +96,7 @@
             </div>
             <div class="dashboard-more row">
                 <div class="col col-12">
-                    <div class="dashboard-project" id="constrol-board" style="width: 20em;">
+                    <div class="dashboard-project" id="constrol-board" style="width: 20em; position: absolute;">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="pop-over-list-item" role="button">
@@ -168,17 +172,193 @@
                     </div>
                 </form>
             </div>
-            <div id="myCalendarWrapper" style="min-width: 98%; min-height: 75%; border: 1px solid gray; margin-top: 1em; padding: 1em 2em; position: relative; background-color: white;"></div>
-        </div>
+            <div id="myCalendarWrapper" style="display: none; min-width: 98%; min-height: 75%; border: 1px solid gray; margin-top: 1em; padding: 1em 2em; background-color: white;"></div>
+        </section>
+        <section class="content pt-4 pb-4" id="content-task" style="position: relative;">
+            <div class="row">
+                <div class="col col-3">
+                    <div class="card" id="card-to-do">
+                        <div class="card-header">
+                          <b>Công việc cần làm</b>
+                        </div>
+                        <div class="card-body list-card">
+                           <ul class="list-group">
+                               <li class="small">
+                                   <input type="text" value="Chỉnh lại estimate" disabled class="form-control pt-3 pb-3">
+                               </li>
+                               <li class="small">
+                                    <input type="text" value="Đánh giá chi phí rủi ro" disabled class="form-control pt-3 pb-3">
+                                </li>
+                                <li class="small">
+                                    <input type="text" value="Bản dịch tiếng nhật và sơ đồ hoạt động" disabled class="form-control pt-3 pb-3">
+                                </li>
+                           </ul>
+                           <textarea class="form-control mt-2" rows="3" placeholder="Tiêu đề cho task..." style="display: none;"></textarea>
+                        </div>
+                        <!-- data-toggle="modal" data-target="#modalInsertTask" -->
+                        <div class="card-footer">
+                            <button class="btn text-secondary" onclick="addNewTask(this)" name="button-new-task">
+                                <span>+</span>
+                                Thêm task khác
+                            </button>
+                            <div class="group-button" style="display: none;">
+                                <button class="btn btn-success" name="button-save-task">Lưu</button>
+                                <button class="btn btn-sencondary" name="button-cancel-task" onclick="cancelTask(this)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card" id="card-doing">
+                        <div class="card-header">
+                          <b>Công việc đang thực hiện</b>
+                        </div>
+                        <div class="card-body list-card">
+                            <ul class="list-group">
+                                <li class="small">
+                                    <input type="text" value="Chỉnh lại estimate" disabled class="form-control pt-3 pb-3">
+                                </li>
+                                <li class="small">
+                                     <input type="text" value="Đánh giá chi phí rủi ro" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                                 <li class="small">
+                                     <input type="text" value="Bản dịch tiếng nhật và sơ đồ hoạt động" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                            </ul>
+                            <textarea class="form-control mt-2" rows="3" placeholder="Tiêu đề cho task..." style="display: none;"></textarea>
+                         </div>
+                         <!-- data-toggle="modal" data-target="#modalInsertTask" -->
+                         <div class="card-footer">
+                             <button class="btn text-secondary" onclick="addNewTask(this)" name="button-new-task">
+                                 <span>+</span>
+                                 Thêm task khác
+                             </button>
+                             <div class="group-button" style="display: none;">
+                                 <button class="btn btn-success" name="button-save-task">Lưu</button>
+                                 <button class="btn btn-sencondary" name="button-cancel-task" onclick="cancelTask(this)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                             </div>
+                         </div>
+                      </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card" id="card-review">
+                        <div class="card-header">
+                          <b>Các công việc đang đánh giá</b>
+                        </div>
+                        <div class="card-body list-card">
+                            <ul class="list-group">
+                                <li class="small">
+                                    <input type="text" value="Chỉnh lại estimate" disabled class="form-control pt-3 pb-3">
+                                </li>
+                                <li class="small">
+                                     <input type="text" value="Đánh giá chi phí rủi ro" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                                 <li class="small">
+                                     <input type="text" value="Bản dịch tiếng nhật và sơ đồ hoạt động" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                            </ul>
+                            <textarea class="form-control mt-2" rows="3" placeholder="Tiêu đề cho task..." style="display: none;"></textarea>
+                         </div>
+                         <!-- data-toggle="modal" data-target="#modalInsertTask" -->
+                         <div class="card-footer">
+                             <button class="btn text-secondary" onclick="addNewTask(this)" name="button-new-task">
+                                 <span>+</span>
+                                 Thêm task khác
+                             </button>
+                             <div class="group-button" style="display: none;">
+                                 <button class="btn btn-success" name="button-save-task">Lưu</button>
+                                 <button class="btn btn-sencondary" name="button-cancel-task" onclick="cancelTask(this)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                             </div>
+                         </div>
+                      </div>
+                </div>
+                <div class="col col-3">
+                    <div class="card" id="card-done">
+                        <div class="card-header">
+                          <b>Các công việc hoàn thành</b>
+                        </div>
+                        <div class="card-body list-card">
+                            <ul class="list-group">
+                                <li class="small">
+                                    <input type="text" value="Chỉnh lại estimate" disabled class="form-control pt-3 pb-3">
+                                </li>
+                                <li class="small">
+                                     <input type="text" value="Đánh giá chi phí rủi ro" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                                 <li class="small">
+                                     <input type="text" value="Bản dịch tiếng nhật và sơ đồ hoạt động" disabled class="form-control pt-3 pb-3">
+                                 </li>
+                            </ul>
+                            <textarea class="form-control mt-2" rows="3" placeholder="Tiêu đề cho task..." style="display: none;"></textarea>
+                         </div>
+                         <!-- data-toggle="modal" data-target="#modalInsertTask" -->
+                         <div class="card-footer">
+                             <button class="btn text-secondary" onclick="addNewTask(this)" name="button-new-task">
+                                 <span>+</span>
+                                 Thêm task khác
+                             </button>
+                             <div class="group-button" style="display: none;">
+                                 <button class="btn btn-success" name="button-save-task">Lưu</button>
+                                 <button class="btn btn-sencondary" name="button-cancel-task" onclick="cancelTask(this)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                             </div>
+                         </div>
+                      </div>
+                </div>
+            </div>
         </section>
     </div>
+    <!-- <div class="modal fade" id="modalInsertTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
     <script src="style/js/index.js"></script>
     <script src="/CalendarPickerJS-master/CalendarPickerJS-master/CalendarPicker.js"></script>
 </body>
 </html>
 <script>
+    const addNewTask = (e) => {
+        const  id = $(e).parent().parent().attr('id');
+        const card = $('#'+id);
+        $(card).find('.list-card textarea').css('display', 'block')
+        $(card).find('.card-footer button[name="button-new-task"]').css('display', 'none');
+        $(card).find('.card-footer .group-button').css('display', 'block');
+    }
+    const cancelTask = (e) => {
+        const id = $(e).parent().parent().parent().attr('id')
+        const card = $('#'+id)
+        $(card).find('.list-card textarea').css('display', 'none')
+        $(card).find('.card-footer button[name="button-new-task"]').css('display', 'block');
+        $(card).find('.card-footer .group-button').css('display', 'none');
+    }
 
-const displayAddUser = (e) => {
+    const displayCalendar = () => {
+        $('#myCalendarWrapper').toggle()
+    }
+    const displayAddUser = (e) => {
         const position = $(e).position()
         console.log(position)
         $('#form-add-user').css('left', (position.left)+'px')
@@ -212,11 +392,6 @@ const displayAddUser = (e) => {
     const myCalender = new CalendarPicker('#myCalendarWrapper', {
       max: new Date(nextYear, 10) 
 });
-
-
-
-   
-
 
     // $(document).mouseup(e => {
     //     console.log($('#form-add-user').has(e.target).length)
